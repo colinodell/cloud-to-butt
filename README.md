@@ -6,6 +6,7 @@
 [![Coverage Status][ico-scrutinizer]][link-scrutinizer]
 [![Quality Score][ico-code-quality]][link-code-quality]
 [![Total Downloads][ico-downloads]][link-downloads]
+![Usefulness](https://img.shields.io/badge/usefulness-low-red.svg)
 
 A simple PSR-7 middleware that replaces "cloud" with "butt".  Created during the SunshinePHP 2017 hackathon.  Never tested in production so YMMV.
 
