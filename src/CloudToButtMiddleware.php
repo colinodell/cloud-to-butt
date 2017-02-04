@@ -8,8 +8,6 @@ use Psr\Http\Message\ServerRequestInterface;
 
 class CloudToButtMiddleware
 {
-    const REPLACEMENTS = ['Cloud' => 'Butt', 'cloud' => 'butt'];
-
     public function __invoke(ServerRequestInterface $request, ResponseInterface $response, callable $next)
     {
         /** @var ResponseInterface $response */
@@ -21,7 +19,7 @@ class CloudToButtMiddleware
         }
 
         if (!$body->isSeekable() || $body->tell() !== 0) {
-            $content = strtr((string) $body, self::REPLACEMENTS);
+            $content = $this->changeCloudToButt($body);
 
             return $response->withBody(stream_for($content));
         }
@@ -34,11 +32,14 @@ class CloudToButtMiddleware
                 $content .= $body->read(1);
             }
 
-            $newBody->write(
-                strtr((string) $body, self::REPLACEMENTS)
-            );
+            $newBody->write($this->changeCloudToButt($content));
         }
 
         return $response->withBody($newBody);
+    }
+
+    private function changeCloudToButt($originalContent)
+    {
+        return strtr((string) $originalContent, ['Cloud' => 'Butt', 'cloud' => 'butt']);
     }
 }
